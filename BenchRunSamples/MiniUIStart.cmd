@@ -1,0 +1,1 @@
+BenchUIRunSamples.exe Mini %1

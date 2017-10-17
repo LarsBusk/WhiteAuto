@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProductList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<SamplesPrProduct>20</SamplesPrProduct>
+	<!--Set to 0 to run forever-->
+	<TotalSamples>0</TotalSamples>
+	<TimeBetweenSamples>30</TimeBetweenSamples>
+	<Products>
+		<Product>
+			<Name>AnnCOU</Name>
+		</Product>
+		<Product>
+			<Name>AnnPFIG</Name>
+		</Product>
+		<Product>
+			<Name>AnnCOG</Name>
+		</Product>
+		<Product>
+			<Name>LocalFullspc</Name>
+		</Product>
+		<Product>
+			<Name>Pls5Const</Name>
+		</Product>
+	</Products>
+</ProductList>

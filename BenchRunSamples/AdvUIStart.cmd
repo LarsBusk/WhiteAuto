@@ -1,0 +1,1 @@
+BenchUIRunSamples.exe Advanced %1 true
