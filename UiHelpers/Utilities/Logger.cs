@@ -46,7 +46,7 @@ namespace Common.Utilities
 
     private void Log(string logLevel, string message, params object[] parameters)
     {
-      string status =$"{DateTime.UtcNow} - {logLevel}: {string.Format(message, parameters)}";
+      string status =$"{DateTime.UtcNow} - {logLevel}: {string.Format(message, parameters)}\n";
       File.AppendAllText(logFileName, status);
       Console.WriteLine(status);
     }

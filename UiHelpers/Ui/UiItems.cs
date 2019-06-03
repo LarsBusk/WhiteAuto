@@ -50,6 +50,12 @@ namespace Common.Ui
     public const string AdvancedSelectProductDialogName = "SelectProductPopup";
 
     public static SearchCriteria AdvancedProductsList = SearchCriteria.ByText("SelectProductListBox");
+	
+	public static SearchCriteria CareViewInstrumentDiagnosticsButton = SearchCriteria.ByText("CareViewInstrumentDiagnosticsButton");
+	
+	public const string InstrumentDiagnosticsPopupName = "InstrumentDiagnosticsPopup";
+	
+	public static SearchCriteria PopupOkButton = SearchCriteria.ByText("PopupOkButton");	
 
     #endregion
 
