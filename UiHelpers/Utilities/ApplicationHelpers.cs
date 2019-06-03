@@ -98,10 +98,22 @@ namespace Common.Utilities
 
     public Application GetApplication(string processName)
     {
-      Process process = Process.GetProcessesByName(processName).First();
-      Application app = Application.Attach(process);
-      logger.LogInfo("Process {0} found.", app.Name);
-      return app;
+      try
+      {
+        Process[] processes = Process.GetProcessesByName(processName);
+        logger.LogInfo($"{processes.Length} found");
+        Process process = processes.First();
+        logger.LogInfo($"Process with name {process.ProcessName} found.");
+        Application app = Application.Attach(process);
+        logger.LogInfo("Process {0} found.", app.Name);
+        return app;
+      }
+      catch (Exception e)
+      {
+        logger.LogError(e.Message);
+        throw;
+      }
+  
     }
 
     public void StartApplication(string path)
