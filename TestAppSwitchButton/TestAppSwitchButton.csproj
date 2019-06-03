@@ -52,7 +52,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\..\Dropbox\Lars\WhiteAuto\UiHelpers\Common.csproj">
+    <ProjectReference Include="..\UiHelpers\Common.csproj">
       <Project>{b438234e-0d90-4eff-89d0-fca423155931}</Project>
       <Name>Common</Name>
     </ProjectReference>

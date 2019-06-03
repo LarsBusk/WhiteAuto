@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using Microsoft.Deployment.WindowsInstaller;
+//using Microsoft.Deployment.WindowsInstaller;
 
 namespace Common.Utilities
 {
@@ -77,12 +77,12 @@ namespace Common.Utilities
         argBuilder.Append("WORKSTATION_TYPE=Emulator,");
       }
 
-      Installer.InstallProduct(fiInstallerName, argBuilder.ToString());
+      //Installer.InstallProduct(fiInstallerName, argBuilder.ToString());
     }
 
     public void Uninstall()
     {
-      Installer.InstallProduct(fiInstallerName, "Remove");
+      //Installer.InstallProduct(fiInstallerName, "Remove");
     }
 
   }
