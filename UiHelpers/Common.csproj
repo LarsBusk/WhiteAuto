@@ -79,17 +79,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Ui\FossIntegratorUiItems.cs" />
-    <Compile Include="Ui\FT1UiItems.cs" />
     <Compile Include="Ui\MeatMaster2UiItems.cs" />
     <Compile Include="Utilities\ApplicationHelpers.cs" />
     <Compile Include="Utilities\ComputerTime.cs" />
     <Compile Include="Utilities\DatabaseHelpers.cs" />
-    <Compile Include="Utilities\FiFunctions.cs" />
     <Compile Include="ProductList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\FiInstallationHelper.cs" />
-    <Compile Include="Utilities\FT1Functions.cs" />
     <Compile Include="Utilities\Functions.cs" />
     <Compile Include="Ui\UiItems.cs" />
     <Compile Include="Ui\Uis.cs" />

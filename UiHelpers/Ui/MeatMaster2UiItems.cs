@@ -16,7 +16,11 @@ namespace Common.Ui
 
     public const string InstrumentStartupCancelButton = "PopupCancelButton";
 
-    public const string CareViewButon = "MenuBarCareButton";
+    public static SearchCriteria CareViewButton = SearchCriteria.ByText("MenuBarCareButton");
+
+    public static SearchCriteria CareViewInstrumentDiagnosticsButton = SearchCriteria.ByText("CareViewInstrumentDiagnosticsButton");
+
+    public static SearchCriteria CareViewExportLogsButton = SearchCriteria.ByText("CareViewExportLogsButton");
 
     public const string CloseDownButton = "CareViewShutDownButton";
 
@@ -25,10 +29,16 @@ namespace Common.Ui
     public const string PopupLeftButton = "PopupLeftButton";
 
     public const string PopupRightButton = "PopupRightButton";
-    
+
     public const string InstrumentStartupStartButton = "InstrumentStartupStartButton";
 
     public const string InstrumentDiagnosticDialog = "InstrumentDiagnosticsPopup";
+
+    public const string ExportLogsDialog = "ExportLogsPopup";
+
+    public const string PopupCollectLogsButton = "PopupCollectLogsButton";
+
+    public const string InstrumentDiagnosticRepeatButton = "ButtonPopUpRepeat";
 
     public const string InstrumentDiagnosticOkButton = "PopupOkButton";
 
@@ -41,5 +51,13 @@ namespace Common.Ui
     public const string PopupOkButton = "PopupLeftButton";
 
     public const string SplashPopup = "SplashPopup";
+
+    #region OnTopView Items
+
+    public const string OnTopProcessName = "FOSS.Nova.UI.OnTopManager.Core";
+
+    public const string OnTopWindowName = "OnTopView";
+
+    #endregion
   }
 }

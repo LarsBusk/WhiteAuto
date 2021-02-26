@@ -113,7 +113,6 @@ namespace Common.Utilities
         logger.LogError(e.Message);
         throw;
       }
-  
     }
 
     public void StartApplication(string path)

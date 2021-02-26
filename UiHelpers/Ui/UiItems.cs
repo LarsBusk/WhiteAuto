@@ -27,9 +27,13 @@ namespace Common.Ui
 
     #region Matilde Items
 
-    public const string MatildeMainWindowName = "ISI Nova";
+    public const string PnovaMainWindowName = "ISI Nova";
 
     public const string MatildeProcessName = "FOSS.Nova.UI.Matilde.Core";
+
+    public const string ProFossProcessName = "ProFossClient";
+
+    public static SearchCriteria PnovaStartStopButton = SearchCriteria.ByAutomationId("MenuBarStartStopButton");
 
     public const string ServiceViewProbeAdjustmentButton = "ServiceViewProbeAdjustmentButton";
 

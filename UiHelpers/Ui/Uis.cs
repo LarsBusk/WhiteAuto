@@ -8,6 +8,7 @@ namespace Common.Ui
   public enum Uis
   {
     MeatMaster2,
+    pNova,
     Advanced,
     Mini,
     ProcessTouch,

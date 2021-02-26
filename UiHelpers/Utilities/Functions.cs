@@ -58,6 +58,10 @@ namespace Common.Utilities
           this.ProductList = UiItems.AdvancedProductsList;
           this.SelectProductDialogIsUpdated = false;
           break;
+        case Uis.pNova:
+          this.MainWindow = ApplicationHelpers.GetMainWindow(UiItems.ProFossProcessName, UiItems.PnovaMainWindowName);
+          this.StartStopButton = UiItems.PnovaStartStopButton;
+          break;
         case Uis.Advanced:
           this.MainWindow = ApplicationHelpers.GetMainWindow(UiItems.AdvancedUiProcessName, UiItems.BenchMainWindowName);
           this.StartStopButton = UiItems.AdvancedUiStartStopButton;
@@ -80,10 +84,7 @@ namespace Common.Utilities
           this.SelectProductDialogIsUpdated = false;
           break;
         case Uis.Matilde:
-          this.MainWindow = ApplicationHelpers.GetMainWindow(UiItems.MatildeProcessName, UiItems.MatildeMainWindowName);
-          break;
-        case Uis.Ft1:
-          this.MainWindow = ApplicationHelpers.GetMainWindow(FT1UiItems.Ft1ProcessName, FT1UiItems.MainWindowName);
+          this.MainWindow = ApplicationHelpers.GetMainWindow(UiItems.MatildeProcessName, UiItems.PnovaMainWindowName);
           break;
         default:
           break;
@@ -193,7 +194,7 @@ namespace Common.Utilities
 
     public void CloseDown()
     {
-      MainWindow.Get<RadioButton>(SearchCriteria.ByText(MeatMaster2UiItems.CareViewButon)).Click();
+      ClickRadioButton(MeatMaster2UiItems.CareViewButton, MainWindow);
       Button closeButton = MainWindow.Get<Button>(SearchCriteria.ByText(MeatMaster2UiItems.CloseDownButton));
       WaitHelpers.WaitForEnabled(closeButton, TimeSpan.FromSeconds(30));
       

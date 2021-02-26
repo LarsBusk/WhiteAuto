@@ -7,20 +7,17 @@ using System.Threading.Tasks;
 using Common.Ui;
 using Common.Utilities;
 
-namespace MM2MeasureAndStop
+namespace PfMeasureAndStop
 {
   class Program
   {
     static void Main(string[] args)
     {
-      MeatMaster2Functions functions = new MeatMaster2Functions();
+      Functions functions = new Functions(Uis.pNova);
 
-      Random random = new Random();
-
-      //int.Parse(Enumerable.FirstOrDefault<string>((IEnumerable<string>) args) ?? "120");
+      int secondsToWait = int.Parse(Enumerable.FirstOrDefault<string>((IEnumerable<string>) args) ?? "120");
       while (true)
       {
-        int secondsToWait = 3600 + random.Next(7200);
         functions.ClickStartStopButton();
         WaitHelpers.WaitSeconds(secondsToWait);
       }

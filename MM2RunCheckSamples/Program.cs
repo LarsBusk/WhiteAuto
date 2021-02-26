@@ -18,13 +18,13 @@ namespace MM2RunCheckSamples
 
       int csCounter = 0;
 
-      while (csCounter < 9)
+      while (true)
       {
         csCounter++;
         functions.ClickStartStopButton();
         Functions.logger.LogInfo("Running CS no {0}", csCounter);
 
-        functions.StartAndWaitForCheckSample();
+        functions.StartAndWaitForCheckSample(25);
       }
     }
   }
