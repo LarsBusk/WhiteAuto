@@ -20,7 +20,7 @@ namespace BenchUIRunSamples
       if (Uis.TryParse(args[0], out myUi))
       {
         Functions helper = new Functions(myUi);
-        applicationHelpers.StartCaffeine();
+        //applicationHelpers.StartCaffeine();
 
         int sampleNo = 1;
 
@@ -35,7 +35,7 @@ namespace BenchUIRunSamples
           }
         }
 
-        while (sampleNo < productList.TotalSamples || productList.TotalSamples == 0)
+        while (sampleNo < productList.TotalSamples | productList.TotalSamples == 0)
         {
           foreach (Product product in productList.Products)
           {

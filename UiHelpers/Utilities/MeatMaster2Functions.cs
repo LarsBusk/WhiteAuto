@@ -8,6 +8,7 @@ using System.Threading;
 using Common.Ui;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace Common.Utilities
@@ -45,29 +46,24 @@ namespace Common.Utilities
     /// </summary>
     public void CancelStartup()
     {
-      WaitHelpers.WaitForDialog(MainWindow, Properties.Resources.MeatMasterII_InstrumentStartupDialog, TimeSpan.FromMinutes(5));
-
-      MainWindow.ModalWindow(Properties.Resources.MeatMasterII_InstrumentStartupDialog)
-        .Get<Button>(SearchCriteria.ByText(MeatMaster2UiItems.InstrumentStartupCancelButton))
-        .Click();
+      WaitHelpers.WaitForDialog(MainWindow, Properties.Resources.MeatMasterII_InstrumentStartupDialog,
+        TimeSpan.FromMinutes(5));
+      var startDialog = MainWindow.ModalWindow(Properties.Resources.MeatMasterII_InstrumentStartupDialog);
+      ClickButton(SearchCriteria.ByText(MeatMaster2UiItems.InstrumentStartupCancelButton), startDialog);
     }
+
     /// <summary>
     /// Closes down Nova
     /// </summary>
     /// <param name="restartWindows">If true, windows will restart during the shutdown, before it is done.</param>
     public void CloseDown(bool restartWindows)
     {
-      ClickRadioButton(MeatMaster2UiItems.CareViewButton, MainWindow);
-      Button closeButton = MainWindow.Get<Button>(SearchCriteria.ByText(MeatMaster2UiItems.CloseDownButton));
-      WaitHelpers.WaitForEnabled(closeButton, TimeSpan.FromSeconds(30));
-
-      closeButton.Click();
+      ChangeToCareView();
+      ClickButton(MeatMaster2UiItems.CloseDownButton);
 
       WaitHelpers.WaitForDialog(MainWindow, MeatMaster2UiItems.MessageBoxPopup, TimeSpan.FromMinutes(2));
-
-      MainWindow.ModalWindow(MeatMaster2UiItems.MessageBoxPopup)
-        .Get<Button>(SearchCriteria.ByText(MeatMaster2UiItems.PopupLeftButton))
-        .Click();
+      var closeDialog = MainWindow.ModalWindow(MeatMaster2UiItems.MessageBoxPopup);
+      ClickButton(MeatMaster2UiItems.PopupLeftButton, closeDialog);
 
       if (restartWindows)
       {
@@ -80,7 +76,7 @@ namespace Common.Utilities
 
     public void StartDiagnostics()
     {
-      ClickRadioButton(MeatMaster2UiItems.CareViewButton, MainWindow);
+      ChangeToCareView();
       ClickButton(MeatMaster2UiItems.CareViewInstrumentDiagnosticsButton);
       MainWindow.ModalWindow(MeatMaster2UiItems.MessageBoxPopup)
         .Get<Button>(SearchCriteria.ByText(MeatMaster2UiItems.PopupLeftButton))
@@ -164,10 +160,12 @@ namespace Common.Utilities
           instrumentDiagnosticOkButton.Click();
           CollectLogs();
         }
-        logger.LogInfo("diagnostics passed.");
-        instrumentDiagnosticOkButton.Click();
+        else
+        {
+          logger.LogInfo("diagnostics passed.");
+          instrumentDiagnosticOkButton.Click();
+        }
       }
-
       else
       {
         logger.LogInfo("Button was not enabled");
@@ -176,11 +174,30 @@ namespace Common.Utilities
 
     public void CollectLogs()
     {
-      ClickRadioButton(MeatMaster2UiItems.CareViewButton, MainWindow);
+      ChangeToCareView();
       ClickButton(MeatMaster2UiItems.CareViewExportLogsButton, MainWindow);
 
       WaitHelpers.WaitForDialog(MainWindow, MeatMaster2UiItems.ExportLogsDialog, TimeSpan.FromSeconds(30));
-      MainWindow.ModalWindow(MeatMaster2UiItems.ExportLogsDialog).Get<Button>(SearchCriteria.ByText(MeatMaster2UiItems.PopupCollectLogsButton)).Click();
+      var exportLogsDialog = MainWindow.ModalWindow(MeatMaster2UiItems.ExportLogsDialog);
+      
+      var combo = exportLogsDialog.Get<ComboBox>(SearchCriteria.All);
+      var its = combo.Items;
+      foreach (var it in its)
+      {
+        logger.LogInfo(it.Text);
+      }
+
+      int item = combo.Items.FindIndex(i => i.Text.ToUpper().StartsWith("1 D"));
+      logger.LogInfo($"The item {item} is found.");
+      combo.Select(item);
+      
+      ClickButton(MeatMaster2UiItems.PopupCollectLogsButton, exportLogsDialog);
+      WaitHelpers.WaitForDialog(MainWindow, MeatMaster2UiItems.MessageBoxPopup, TimeSpan.FromMinutes(60));
+      var logsExportDoneDialog = MainWindow.ModalWindow(MeatMaster2UiItems.MessageBoxPopup);
+      WaitHelpers.WaitFor(() =>
+        logsExportDoneDialog.Get<Button>(SearchCriteria.ByText(MeatMaster2UiItems.PopupLeftButton)).Visible, TimeSpan.FromMinutes(30));
+      ClickButton(MeatMaster2UiItems.PopupLeftButton, logsExportDoneDialog);
+      ClickButton(MeatMaster2UiItems.PopupCloseButton, exportLogsDialog);
     }
 
     public void SwitchOffXray()

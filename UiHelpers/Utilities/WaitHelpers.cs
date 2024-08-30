@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceProcess;
 using System.Text;
 using System.Threading;
+using Castle.Core.Internal;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.WindowItems;
 
@@ -105,10 +107,29 @@ namespace Common.Utilities
       return false;
     }
 
+    public static bool WaitForServiceState(ServiceController sc, ServiceControllerStatus state, TimeSpan timeout)
+    {
+      DateTime starTime = DateTime.Now;
+      while (sc.Status != state)
+      {
+        if (DateTime.Now > starTime.Add(timeout))
+          return false;
+        WaitSeconds(5);
+        sc.Refresh();
+      }
+
+      return true;
+    }
+
+    public static bool WaitForServiceState(ServiceController sc, ServiceControllerStatus state)
+    {
+      return WaitForServiceState(sc, state, TimeSpan.FromMinutes(1));
+    }
+
     private static bool DialogIsFound(Window window, string dialogName)
     {
       IEnumerable<Window> dialogs = window.ModalWindows();
-      return dialogs.Any(d => d.Name == dialogName);
+      return dialogs == null ? false : dialogs.Any(d => d.Name == dialogName);
     }
   }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 using Common.Ui;
@@ -25,9 +27,9 @@ namespace Common.Utilities
       {
         logger.LogInfo("Finding window {0} in {1}", windowName, processName);
         Application novaApp = GetApplication(processName);
-        WaitHelpers.WaitFor(() => WindowsForProcess(processName).Contains(windowName), TimeSpan.FromMinutes(30), TimeSpan.FromMinutes(1));
+        WaitHelpers.WaitFor(() => WindowsForProcess(processName).Contains(windowName), TimeSpan.FromMinutes(30),
+          TimeSpan.FromMinutes(1));
         WaitHelpers.WaitSeconds(10);
-        // WaitHelpers.WaitFor(() => novaApp.GetWindows().Count > 0, TimeSpan.FromMinutes(30));
         logger.LogInfo("Window for {0} is found.", novaApp.Name);
         Window window = novaApp.GetWindow(windowName);
         logger.LogInfo("Nova window {0} is found", window.Title);
@@ -55,7 +57,7 @@ namespace Common.Utilities
       catch (Exception e)
       {
         logger.LogError("Windows for process failed with exception {0}", e.Message);
-        throw;
+        return null;
       }
     }
 
@@ -73,19 +75,31 @@ namespace Common.Utilities
 
     public bool WindowIsVisible(string processName, string windowTitle)
     {
-      Application application = GetApplication(processName);
-
-     while (application.GetWindows() != null && !application.GetWindows().Any(e => e.Title == windowTitle))
+      try
       {
-        logger.LogInfo("{0} windows found for {1}", application.GetWindows().Count, application.Name);
-        Thread.Sleep(TimeSpan.FromSeconds(5));
-        foreach (var window in WindowsForProcess(MeatMaster2UiItems.Mm2ProcessName))
-        {
-          logger.LogInfo("Window with name: {0} found", window);
-        }
-      }
+        Application application = GetApplication(processName);
+        var windows = WindowsForProcess(processName);
 
-      return true;
+        while (windows != null && !windows.Any(w => w.Equals(windowTitle)))
+        {
+          logger.LogInfo("{0} windows found for {1}", application.GetWindows().Count, application.Name);
+          Thread.Sleep(TimeSpan.FromSeconds(5));
+
+          foreach (var window in windows)
+          {
+            logger.LogInfo($"Window with name: {window} found");
+          }
+
+          windows = WindowsForProcess(processName);
+        }
+
+        return true;
+      }
+      catch (Exception e)
+      {
+        logger.LogError(e.Message);
+        return false;
+      }
     }
 
     public void KillProcess(string processName)
@@ -131,6 +145,52 @@ namespace Common.Utilities
       {
         StartApplication("caffeine.exe");
       }
+    }
+
+    public void StartMM2()
+    {
+      StartApplication(MeatMaster2UiItems.PathToMeatMaster);
+      WaitHelpers.WaitFor(() => ProcessIsRunning(MeatMaster2UiItems.Mm2ProcessName), TimeSpan.FromMinutes(2));
+      WaitHelpers.WaitFor(
+        () => WindowIsVisible(MeatMaster2UiItems.Mm2ProcessName, MeatMaster2UiItems.Mm2MainWindowName),
+        TimeSpan.FromMinutes(2));
+    }
+
+    public void CleanFolder(string name, DateTime fromDateTime)
+    {
+      string[] files = Directory.GetFiles(name);
+      foreach (var file in files)
+      {
+        try
+        {
+          if (File.GetLastWriteTime(file) < fromDateTime)
+            File.Delete(file);
+        }
+        catch (Exception e)
+        {
+          logger.LogError("File could not be deleted.");
+        }
+      }
+    }
+
+    public void RestartService(string serviceName)
+    {
+      ServiceController sc = new ServiceController(serviceName);
+      logger.LogInfo($"Stopping {serviceName}");
+      sc.Stop();
+
+      if (WaitHelpers.WaitForServiceState(sc, ServiceControllerStatus.Stopped))
+        logger.LogInfo($"{serviceName} was successfully stopped.");
+      else
+        logger.LogError($"Failed stopping {serviceName}.");
+      
+      logger.LogInfo($"Starting {serviceName}");
+      sc.Start();
+
+      if (WaitHelpers.WaitForServiceState(sc, ServiceControllerStatus.Running))
+        logger.LogInfo($"{serviceName} was successfully started.");
+      else
+        logger.LogError($"Failed starting {serviceName}");
     }
   }
 }

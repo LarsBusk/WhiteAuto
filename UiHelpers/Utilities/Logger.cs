@@ -39,9 +39,8 @@ namespace Common.Utilities
       if (!File.Exists(logFileName))
       {
         File.Create(logFileName).Close();
+        LogInfo(".....Start logging all timestamps are in UTC......");
       }
-
-      LogInfo("Start logging all timestamps are in UTC.");
     }
 
     private void Log(string logLevel, string message, params object[] parameters)

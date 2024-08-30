@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using Common.Ui;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Windows.Automation;
 using System.Xml;
 using System.Xml.Serialization;
-using Castle.Core.Logging;
-using Common.Ui;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
@@ -16,7 +12,7 @@ using TestStack.White.UIItems.WindowItems;
 
 namespace Common.Utilities
 {
-  public class Functions
+    public class Functions
   {
     #region private properties
 
@@ -81,7 +77,7 @@ namespace Common.Utilities
           this.StartStopButton = UiItems.MiniUiStartStopButton;
           this.SelectProductsDialogName = UiItems.MiniUiSelectProductsDialogName;
           this.ProductList = UiItems.MiniUiProductsList;
-          this.SelectProductDialogIsUpdated = false;
+          this.SelectProductDialogIsUpdated = true;
           break;
         case Uis.Matilde:
           this.MainWindow = ApplicationHelpers.GetMainWindow(UiItems.MatildeProcessName, UiItems.PnovaMainWindowName);
@@ -185,6 +181,7 @@ namespace Common.Utilities
       }
       else
       {
+        logger.LogInfo("No products found, creating empty product list.");
         productList = new ProductList();
         productList.Products.Add(new Product(string.Empty));
       }
@@ -194,7 +191,7 @@ namespace Common.Utilities
 
     public void CloseDown()
     {
-      ClickRadioButton(MeatMaster2UiItems.CareViewButton, MainWindow);
+      ChangeToCareView();
       Button closeButton = MainWindow.Get<Button>(SearchCriteria.ByText(MeatMaster2UiItems.CloseDownButton));
       WaitHelpers.WaitForEnabled(closeButton, TimeSpan.FromSeconds(30));
       
@@ -267,9 +264,24 @@ namespace Common.Utilities
       }
     }
 
+    public void ClickRadioButton(SearchCriteria criteria)
+    {
+      this.ClickRadioButton(criteria, MainWindow);
+    }
+
     public void ClickButton(SearchCriteria criteria)
     {
       ClickButton(criteria, MainWindow);
+    }
+
+    public void ClickButton(string btnName, Window window)
+    {
+      this.ClickButton(SearchCriteria.ByText(btnName), window);
+    }
+
+    public void ClickButton(string btnName)
+    {
+      this.ClickButton(SearchCriteria.ByText(btnName), MainWindow);
     }
 
     #endregion
@@ -285,7 +297,11 @@ namespace Common.Utilities
           GetCurrentPropertyValue(AutomationElement.NameProperty).Equals(itemToSelect));
       //Assert.NotNull(item, "The item {0} is not found on the list {1} items found.", itemToSelect, items.Count);
       item.Click();
+    }
 
+    public void ChangeToCareView()
+    {
+      ClickRadioButton(MeatMaster2UiItems.CareViewButton);
     }
 
     private void ClickSelectProduct()

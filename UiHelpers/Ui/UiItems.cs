@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TestStack.White.UIItems.Finders;
+﻿using TestStack.White.UIItems.Finders;
 
 namespace Common.Ui
 {
-  public class UiItems
+    public class UiItems
   {
     #region ProcessTouch items
 

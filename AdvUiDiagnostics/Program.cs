@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Ui;
+﻿using Common.Ui;
 using Common.Utilities;
+using System;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace AdvUiDiagnostics
 {
-  class Program
+    class Program
   {
     static void Main(string[] args)
     {
