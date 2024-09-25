@@ -1,0 +1,1 @@
+AdvUiDiagnostics.exe Mini

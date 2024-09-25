@@ -51,10 +51,6 @@ namespace Common.Ui
 
     public static SearchCriteria AdvancedProductsList = SearchCriteria.ByText("SelectProductListBox");
 	
-	public static SearchCriteria CareViewInstrumentDiagnosticsButton = SearchCriteria.ByText("CareViewInstrumentDiagnosticsButton");
-	
-	public const string InstrumentDiagnosticsPopupName = "InstrumentDiagnosticsPopup";
-	
 	public static SearchCriteria PopupOkButton = SearchCriteria.ByText("PopupOkButton");	
 
     #endregion
@@ -89,7 +85,11 @@ namespace Common.Ui
 
     public static SearchCriteria MessageBoxPopupNoButton = SearchCriteria.ByText("PopupLeftButton");
 
-    #endregion
+    public static SearchCriteria CareViewInstrumentDiagnosticsButton = SearchCriteria.ByText("CareViewInstrumentDiagnosticsButton");
 
-  }
+    public const string InstrumentDiagnosticsPopupName = "InstrumentDiagnosticsPopup";
+
+        #endregion
+
+    }
 }

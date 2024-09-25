@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35201.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MM2RunReferences", "MM2RunReferences\MM2RunReferences.csproj", "{E3D9988B-E0CA-4699-B82C-32E39DC1EFE2}"
 EndProject
@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAppSwitchButton", "Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MM2MeasureAndStop", "MM2MeasureAndStop\MM2MeasureAndStop.csproj", "{910B5172-0591-408B-86CC-783A60ADFD63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvUiDiagnostics", "AdvUiDiagnostics\AdvUiDiagnostics.csproj", "{7F7A46C8-F166-4232-B006-9B07ADF3868C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstrumentDiagnostics", "AdvUiDiagnostics\InstrumentDiagnostics.csproj", "{7F7A46C8-F166-4232-B006-9B07ADF3868C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PfMeasureAndStop", "PstMeasureAndStop\PfMeasureAndStop.csproj", "{26007F89-F25A-465C-B613-434DE64C86D4}"
 EndProject

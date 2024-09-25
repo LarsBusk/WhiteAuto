@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7F7A46C8-F166-4232-B006-9B07ADF3868C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>AdvUiDiagnostics</RootNamespace>
-    <AssemblyName>AdvUiDiagnostics</AssemblyName>
+    <RootNamespace>InstrumentDiagnostics</RootNamespace>
+    <AssemblyName>InstrumentDiagnostics</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -27,7 +27,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\Output\AdvUiDiagnostics\</OutputPath>
+    <OutputPath>..\Output\InstrumentDiagnostics\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -56,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="StartDiagAdvanced.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="StartDiagMini.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UiHelpers\Common.csproj">
