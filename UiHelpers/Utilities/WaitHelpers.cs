@@ -33,7 +33,31 @@ namespace Common.Utilities
       return !elapsed;
     }
 
-    public static bool WaitFor(Func<bool> condition, TimeSpan timeout)
+    public static bool SafeWaitFor(Func<bool> condition, TimeSpan timeout, TimeSpan interval)
+    {
+        DateTime startTime = DateTime.Now;
+        bool elapsed = false;
+        bool conditionMet = false;
+
+        while (!conditionMet && !elapsed)
+        {
+            try
+            {
+                conditionMet = condition();
+            }
+            catch (Exception)
+            {
+                conditionMet = false;
+            }
+
+            Thread.Sleep(interval);
+            elapsed = (DateTime.Now - startTime) > timeout;
+        }
+
+        return !elapsed;
+    }
+
+        public static bool WaitFor(Func<bool> condition, TimeSpan timeout)
     {
       return WaitFor(condition, timeout, TimeSpan.FromSeconds(10));
     }
@@ -84,7 +108,7 @@ namespace Common.Utilities
         return false;
       }
 
-      logger.LogError("The uiitem was null.");
+      logger.LogError("The ui item was null.");
       return false;
     }
 

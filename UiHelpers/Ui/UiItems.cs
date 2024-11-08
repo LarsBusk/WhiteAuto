@@ -89,6 +89,30 @@ namespace Common.Ui
 
     public const string InstrumentDiagnosticsPopupName = "InstrumentDiagnosticsPopup";
 
+    public static SearchCriteria AdvancedDiagnosticsButton = SearchCriteria.ByAutomationId("AdvancedDiagnosticsButton");
+
+    public const string AdvancedDiagnosticsDialogPopup = "AdvancedDiagnosticsDialogPopup";
+
+    public static SearchCriteria RunTestButton = SearchCriteria.ByAutomationId("RunTestButton");
+
+    public static SearchCriteria RunTestsButton = SearchCriteria.ByAutomationId("RunTestsButton");
+
+        public static SearchCriteria OkButton = SearchCriteria.ByText("OkButton");
+
+    public static SearchCriteria CloseButton = SearchCriteria.ByAutomationId("CloseButton");
+
+    public static SearchCriteria ModuleTestsListView = SearchCriteria.ByAutomationId("ModuleTests");
+
+    public static SearchCriteria DetectorModuleTestListItem = SearchCriteria.ByText("FOSS.Nova.UI.Domain.DataModel.DetectorModuleTest");
+
+    public static SearchCriteria MonochromatorModuleTestListItem = SearchCriteria.ByText("FOSS.Nova.UI.Domain.DataModel.MonochromatorModuleTest");
+
+    public static SearchCriteria SampleMotorModuleTestListItem = SearchCriteria.ByText("FOSS.Nova.UI.Domain.DataModel.SampleMotorModuleTest");
+
+    public static SearchCriteria AllTestsListItem = SearchCriteria.ByText("FOSS.Nova.UI.Domain.DataModel.AllTestsModuleTest");
+
+
+
         #endregion
 
     }
